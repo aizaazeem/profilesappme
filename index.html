@@ -3,38 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Website</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Aiza Azeem | Data Scientist</title>
+    <style>
+        /* Barbie Theme Colors and Fonts */
+        :root {
+            --barbie-pink: #FF69B4;
+            --barbie-light-pink: #FFBCD9;
+            --barbie-purple: #9370DB;
+            --barbie-blue: #73C2FB;
+            --barbie-white: #FFF8FA;
+            --barbie-black: #2D2D2D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--barbie-white);
+            color: var(--barbie-black);
+            line-height: 1.6;
+        }
+
+        /* Header styling */
+        .header {
+            background: linear-gradient(135deg, var(--barbie-pink), var(--barbie-purple));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 8px solid var(--barbie-light-pink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/400') center/cover;
+            opacity: 0.1;
+        }
+
+        .profile-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto;
+            display: block;
+            background-color: var(--barbie-light-pink);
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 3rem;
+            margin-top: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--barbie-light-pink);
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--barbie-pink);
+        }
+
+        .section-title {
+            color: var(--barbie-pink);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--barbie-light-pink);
+            padding-bottom: 0.5rem;
+        }
+
+        /* About section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .skills-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category h3 {
+            color: var(--barbie-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-pill {
+            background-color: var(--barbie-light-pink);
+            color: var(--barbie-black);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* Education section */
+        .education-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .education-item h3 {
+            color: var(--barbie-purple);
+            margin-bottom: 0.25rem;
+        }
+
+        .education-item .duration {
+            color: var(--barbie-pink);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: linear-gradient(to bottom right, white, var(--barbie-light-pink));
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-img {
+            height: 150px;
+            background-color: var(--barbie-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            color: var(--barbie-purple);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .project-tech {
+            color: var(--barbie-pink);
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Contact section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--barbie-purple);
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--barbie-light-pink);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--barbie-pink);
+        }
+
+        .submit-btn {
+            background-color: var(--barbie-pink);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--barbie-purple);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--barbie-black);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--barbie-light-pink);
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem 0;
+            }
+
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .title {
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Barbie-inspired decorative elements */
+        .deco-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            opacity: 0.7;
+            animation: twinkle 5s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 0.9;
+                transform: scale(1.2);
+            }
+        }
+
+        .star:nth-child(1) {
+            top: 10%;
+            left: 15%;
+            animation-delay: 0.2s;
+        }
+
+        .star:nth-child(2) {
+            top: 20%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+
+        .star:nth-child(3) {
+            bottom: 15%;
+            left: 30%;
+            animation-delay: 1.5s;
+        }
+
+        .star:nth-child(4) {
+            bottom: 25%;
+            right: 15%;
+            animation-delay: 2.2s;
+        }
+
+        /* Additional Barbie visual elements */
+        .barbie-bullet {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: var(--barbie-pink);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Simple Website</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="deco-stars">
+            <div class="star">✨</div>
+            <div class="star">✨</div>
+            <div class="star">✨</div>
+            <div class="star">✨</div>
+        </div>
+        <div class="profile-container">
+            <div class="profile-pic">
+                <!-- Profile image placeholder -->
+            </div>
+            <h1 class="name">Aiza Azeem</h1>
+            <h2 class="title">Data Scientist & AWS Cloud Practitioner</h2>
+            <div class="social-links">
+                <a href="mailto:contactaizaazeem@gmail.com">Email</a>
+                <a href="https://linkedin.com/in/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/" target="_blank">GitHub</a>
+            </div>
+        </div>
     </header>
 
-    <section id="home">
-        <h2>Home</h2>
-        <p>This is the home section of the website. You can add more content here.</p>
-    </section>
+    <main class="main-content">
+        <section class="section" id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Passionate about applying descriptive, predictive, and prescriptive analytics to real-world challenges. Skilled in data preparation, analysis, and presenting insights in a clear and understandable manner.</p>
+                    <br>
+                    <p>Aspires to drive sustainable, accessible, and inclusive business practices through data science. Proficient in Python, C++, SQL, and statistical modeling, with a strong focus on accountability and professional growth in a collaborative team environment.</p>
+                </div>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3>Programming</h3>
+                        <div class="skill-pills">
+                            <div class="skill-pill">Python</div>
+                            <div class="skill-pill">C++</div>
+                            <div class="skill-pill">C</div>
+                            <div class="skill-pill">SQL</div>
+                            <div class="skill-pill">Git</div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Cloud Computing</h3>
+                        <div class="skill-pills">
+                            <div class="skill-pill">AWS</div>
+                            <div class="skill-pill">Cloud Practitioner</div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>AI and Machine Learning</h3>
+                        <div class="skill-pills">
+                            <div class="skill-pill">Generative AI</div>
+                            <div class="skill-pill">Model Development</div>
+                            <div class="skill-pill">LSTM</div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Data and Analytics</h3>
+                        <div class="skill-pills">
+                            <div class="skill-pill">Data Visualization</div>
+                            <div class="skill-pill">Data Warehousing</div>
+                            <div class="skill-pill">Power BI</div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Automation and DevOps</h3>
+                        <div class="skill-pills">
+                            <div class="skill-pill">Docker</div>
+                            <div class="skill-pill">Jenkins</div>
+                            <div class="skill-pill">Grafana</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="about">
-        <h2>About</h2>
-        <p>This is the about section. Here you can describe yourself or your website.</p>
-    </section>
+        <section class="section" id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3>Ghulam Ishaq Khan Institute Topi, Swabi</h3>
+                <p class="duration">Bachelor of Data Science | Sep 2022 – Present</p>
+            </div>
+            <div class="education-item">
+                <h3>Nixor College Karachi, Pakistan</h3>
+                <p class="duration">A levels | June 2022</p>
+            </div>
+        </section>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Feel free to contact us at <a href="mailto:contact@example.com">contact@example.com</a></p>
-    </section>
+        <section class="section" id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        ☁️
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Cloud OS Scheduler</h3>
+                        <p class="project-tech">AWS, Python, Cloud Computing</p>
+                        <p>Developed a dynamic workload optimizer integrating local process monitoring with AWS cloud services for scalable and efficient workload optimization.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        🧠
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Automated Essay Scoring Using LSTM</h3>
+                        <p class="project-tech">Python, LSTM, NLP</p>
+                        <p>Built an LSTM-based model for automated essay scoring, implementing preprocessing techniques and sequential text analysis to capture context effectively.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        🚌
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Bus Reservation System</h3>
+                        <p class="project-tech">C++, MySQL</p>
+                        <p>Designed and implemented a bus reservation system with database integration to manage bookings, cancellations, and schedule tracking efficiently.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        📚
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Library Management System</h3>
+                        <p class="project-tech">C++, Object Oriented Programming</p>
+                        <p>Developed an OOP-driven library management system using C++ with classes, inheritance, and polymorphism to manage book records, users, and transactions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 My Simple Website</p>
+        <section class="section" id="contact">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" placeholder="Enter your message"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Aiza Azeem. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
     </footer>
+
+    <script>
+        // Simple script to make the contact form interactive
+        document.querySelector('.submit-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Thank you for reaching out! This is a demo form - in a real implementation, your message would be sent.');
+            document.querySelectorAll('input, textarea').forEach(input => input.value = '');
+        });
+
+        // Add animated stars to the header
+        function createStars() {
+            const header = document.querySelector('.header');
+            for (let i = 0; i < 15; i++) {
+                const star = document.createElement('div');
+                star.textContent = '✨';
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                star.style.fontSize = `${Math.random() * 10 + 10}px`;
+                document.querySelector('.deco-stars').appendChild(star);
+            }
+        }
+        
+        window.onload = function() {
+            createStars();
+        };
+    </script>
 </body>
 </html>
